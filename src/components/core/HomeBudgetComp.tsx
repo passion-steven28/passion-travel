@@ -1,7 +1,7 @@
 'use client'
 import React from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card'
-import { pieArcLabelClasses, PieChart } from "@mui/x-charts";
+import { DefaultizedPieValueType, pieArcLabelClasses, PieChart } from "@mui/x-charts";
 
 type Props = {}
 
