@@ -8,7 +8,6 @@ import { usePathname } from 'next/navigation'
 import HomeSideCardLayout from "./HomeSideCardLayout";
 import BookingCalender from "../core/BookingCalender";
 import HomeBudgetComp from "../core/HomeBudgetComp";
-import { ReactNode } from "react";
 
 
 const navLinks = [
