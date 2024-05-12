@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "../components/theme-provider";
 import NavBar from "@/components/shared/NavBar";
 import { cn } from "@/lib/utils";
+import { ClerkProvider } from "@clerk/nextjs";
 
 
 const poppins = Poppins({
@@ -31,9 +32,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={cn("w-full h-full relative", poppins.className, "bg-white", josefin_sans.className)}>
-        {/* <ThemeProvider
+    <ClerkProvider>
+      <html lang="en">
+        <body className={cn("w-full h-full relative", poppins.className, "bg-white", josefin_sans.className)}>
+          {/* <ThemeProvider
           attribute="class"
           defaultTheme="dark"
           enableSystem
@@ -41,8 +43,9 @@ export default function RootLayout({
         > */}
           <NavBar />
           {children}
-        {/* </ThemeProvider> */}
-      </body>
-    </html>
+          {/* </ThemeProvider> */}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }
