@@ -1,65 +1,23 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
 }
 
-// Define tables
+
+
 model User {
-  id          String  @id @default(uuid())
-  cleckId String
-  name String
-  email       String
-  profile String
-  // bookings Booking[]
+  id      String   @id @default(auto()) @map("_id") @db.ObjectId
+  email   String
+  name    String?
+  address Address?
 }
-
-model Hotel {
-  id            String  @id @default(uuid())
-  name          String
-  location      String
-  price Float
-    // bookings Booking[]
+type Address {
+  street String
+  city   String
+  state  String
+  zip    String
 }
-
-model TransportOption {
-  id    String  @id @default(uuid())
-  type  String
-  price Float
-    // bookings Booking[]
-}
-
-// model Booking {
-//   id          String    @id @default(uuid())
-//   userId      String
-//   hotelId     String
-//   transportId String
-//   startDate   DateTime
-//   endDate     DateTime
-//   paymentId   String    // Add this line if it doesn't exist
-
-//   // Relationships
-//   User        User      @relation(fields: [userId], references: [id])
-//   Hotel       Hotel     @relation(fields: [hotelId], references: [id])
-//   Transport   TransportOption @relation(fields: [transportId], references: [id])
-//   Payment     Payment   @relation(fields: [paymentId], references: [id])
-// }
-
-// model Payment {
-//   id            String  @id @default(uuid())
-//   bookingId     String
-//   amount        Float
-//   paymentStatus String
-//    booking       Booking @relation(fields: [bookingId], references: [id])
-// }
-
