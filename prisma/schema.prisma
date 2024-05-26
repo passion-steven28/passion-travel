@@ -17,7 +17,8 @@ model Hotel {
   id   String @id @default(auto()) @map("_id") @db.ObjectId
   name String
   location String
-  descrption String
+  description String
   price Int
-  rate Int
+  imgID String
+  rate Int?
 }
