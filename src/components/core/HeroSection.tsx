@@ -13,7 +13,9 @@ import {
 import Image from 'next/image'
 
 type Props = {
+    userName: string
     name: string
+    url: string[]
 }
 
 const images = [
@@ -36,7 +38,7 @@ const images = [
 ]
 
 
-export default function HeroSection({ name }: Props) {
+export default function HeroSection({ userName,name,url }: Props) {
     const plugin = React.useRef(
         Autoplay({ delay: 2000, stopOnInteraction: true })
     )
@@ -44,7 +46,7 @@ export default function HeroSection({ name }: Props) {
     return (
         <div>
             <div>
-                <h1 className='text-xl'>hi, {name}</h1>
+                <h1 className='text-xl'>hi, {userName}</h1>
                 <p className='text-xl font-semibold underline'>lets explore the world today!</p>
             </div>
 
@@ -56,7 +58,7 @@ export default function HeroSection({ name }: Props) {
                     onMouseLeave={plugin.current.reset}
                 >
                     <CarouselContent>
-                        {images.map((image, index) => (
+                        {url.map((image, index) => (
                             <CarouselItem
                                 className=''
                                 key={index}>
@@ -64,8 +66,8 @@ export default function HeroSection({ name }: Props) {
                                     className='h-[10rem] relative'
                                 >
                                         <Image
-                                        src={image.url}
-                                        alt={image.name}
+                                        src={image}
+                                        alt='img'
                                         fill
                                         className='object-cover object-center w-full h-full'
                                     />

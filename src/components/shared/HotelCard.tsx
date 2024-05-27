@@ -1,9 +1,12 @@
+'use client'
 import React from 'react'
 import { Card, CardContent, CardFooter, CardTitle } from '../ui/card'
 import { StarIcon } from 'lucide-react'
 import { Button } from '../ui/button'
 import Image from 'next/image'
 import { cn } from '@/lib/utils'
+import { CldImage } from 'next-cloudinary'
+import { getCldImageUrl } from 'next-cloudinary';
 
 type Props = {
     name: string;
@@ -14,15 +17,29 @@ type Props = {
     image: string;
 }
 
-export default function HotelCard({ name, location, rating, price, discount,image }: Props) {
+
+export default function HotelCard({ name, location, rating, price, discount, image }: Props) {
+    const url = getCldImageUrl({
+        width: 'fill',
+        height: 'fill',
+        src: image
+    });
+    console.log(url);
+
     return (
-        <Card>
-            <CardContent className='relative h-[10rem]'>
-                <Image
-                    src={image}
-                    alt='img'
+        <Card className='hover:shadow-lg'>
+            <CardContent className='relative h-[10rem] mb-2'>
+                {/* <Image
+                    src={url}
+                    alt="Description of my image"
                     fill
-                    className='w-full h-full object-cover object-center'
+                /> */}
+                <CldImage
+                    fill
+                    fillBackground
+                    src={image}
+                    sizes="100vw"
+                    alt="Description of my image"
                 />
             </CardContent>
             <CardFooter className='grid gap-2'>
@@ -30,13 +47,13 @@ export default function HotelCard({ name, location, rating, price, discount,imag
                     <div className='grid gap-2'>
                         <CardTitle className='text-lg'>{name}</CardTitle>
                         <h1 className='text-sm'>{location}</h1>
-                        <div>
+                        <div className='flex items-center gap-1'>
                             <StarIcon size={20} />
                             <span className='text-sm'>{rating}</span>
                         </div>
                     </div>
                     <div className='grid gap-2'>
-                        <CardTitle className={cn(discount? 'text-red-700 line-through' : 'underline')}>
+                        <CardTitle className={cn(discount ? 'text-red-700 line-through' : 'underline')}>
                             {price}
                         </CardTitle>
                         <CardTitle className='underline'>
@@ -45,8 +62,10 @@ export default function HotelCard({ name, location, rating, price, discount,imag
                     </div>
                 </div>
                 <Button
-                className='w-full bg-M_primary text-M_white'
-                >book now</Button>
+                    className='w-full bg-M_primary text-M_white'
+                >
+                    book now
+                </Button>
             </CardFooter>
         </Card>
     )
